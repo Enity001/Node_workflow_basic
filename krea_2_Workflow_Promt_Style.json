@@ -1,0 +1,218 @@
+{
+  "1": {
+    "inputs": {
+      "unet_name": "krea2/krea2_turbo_mxfp8.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "2": {
+    "inputs": {
+      "vae_name": "Krea2/krea2RealVae_v10.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "4": {
+    "inputs": {
+      "clip_name": "Krea2/Krea2-Engineer-V1-bf16.safetensors",
+      "type": "krea2",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "5": {
+    "inputs": {
+      "seed": 345226862962337,
+      "steps": 8,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "1",
+        0
+      ],
+      "positive": [
+        "12",
+        0
+      ],
+      "negative": [
+        "10",
+        0
+      ],
+      "latent_image": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "10": {
+    "inputs": {
+      "conditioning": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut",
+    "_meta": {
+      "title": "Conditioning Zero Out"
+    }
+  },
+  "11": {
+    "inputs": {
+      "samples": [
+        "5",
+        0
+      ],
+      "vae": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "12": {
+    "inputs": {
+      "text": [
+        "30",
+        0
+      ],
+      "clip": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "13": {
+    "inputs": {
+      "images": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "15": {
+    "inputs": {
+      "width": [
+        "27",
+        0
+      ],
+      "height": [
+        "27",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "27": {
+    "inputs": {
+      "ResolutionState": "{\"mode\":\"preset\",\"ratio\":\"9:16\",\"w\":480,\"h\":832,\"custom_w\":1024,\"custom_h\":1024,\"custom_ratio_w\":4,\"custom_ratio_h\":3,\"snap\":16}"
+    },
+    "class_type": "PixaromaResolution",
+    "_meta": {
+      "title": "Resolution Pixaroma"
+    }
+  },
+  "28": {
+    "inputs": {
+      "image": "2 (1).jpeg"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "29": {
+    "inputs": {
+      "auto_download": false,
+      "preview": "A woman with dark hair and glasses stands in a dimly lit room, wearing an orange crop top and matching shorts. She wears a baseball cap backwards and poses confidently. Behind her, a bed with white linens is visible, along with a lamp casting warm light. The scene suggests a casual, possibly staged environment.",
+      "image": [
+        "28",
+        0
+      ]
+    },
+    "class_type": "PiDCaptionCreator",
+    "_meta": {
+      "title": "PiD Caption Creator"
+    }
+  },
+  "30": {
+    "inputs": {
+      "text_0": "Style: A polished, contemporary glamour-illustration style built on smooth digital rendering that blends idealized, curve-forward proportion with a cleaner, high-production finish than its mid-century roots, richly airbrushed shading giving skin a flawless, luminous glow, a confident, self-assured posing sensibility balancing playful charm with modern empowerment, meticulous attention to crisp, contemporary silhouette and expression, and a vibrant, current glamour-illustration polish that feels playful, confident, and unmistakably of-the-moment. Influenced by: contemporary digital pin-up illustration tradition, semi-realistic airbrush-rendering technique, modern glamour-illustration practice, digital-painting portrait method.. Subject: A woman with dark hair and glasses stands in a dimly lit room, wearing an orange crop top and matching shorts. She wears a baseball cap backwards and poses confidently. Behind her, a bed with white linens is visible, along with a lamp casting warm light. The scene suggests a casual, possibly staged environment.",
+      "text": [
+        "34",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "34": {
+    "inputs": {
+      "prompt": [
+        "29",
+        0
+      ],
+      "style": "2020s Pin-Up",
+      "template": "Style: {style}. Subject: {prompt}"
+    },
+    "class_type": "ClioStyle",
+    "_meta": {
+      "title": "💅 Clio Style Library"
+    }
+  },
+  "35": {
+    "inputs": {
+      "anything": [
+        "36",
+        0
+      ]
+    },
+    "class_type": "easy clearCacheAll",
+    "_meta": {
+      "title": "Clear Cache All"
+    }
+  },
+  "36": {
+    "inputs": {
+      "anything": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "easy cleanGpuUsed",
+    "_meta": {
+      "title": "Clean VRAM Used"
+    }
+  }
+}
